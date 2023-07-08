@@ -1,5 +1,36 @@
+import { FormEvent, useState } from "react"
 
 export default function Home() {
+  const [v, setV] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onSubmit = async (e: FormEvent) => {
+    try {
+
+      e.preventDefault()
+      if (!v) return
+      setIsLoading(true)
+      const result = await fetch('/api/create-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: v
+        })
+      }).then(response => response.json())
+
+      if (!result.status) {
+
+      }
+
+    } catch (error) {
+
+    } finally {
+
+      setIsLoading(false)
+    }
+  }
   return (
     <>
       <div className="flex flex-col gap-1">
@@ -23,12 +54,10 @@ export default function Home() {
           feito para pequenas empresas. Crie e altere o modelo de orçamento, envie
           e rastreie, cotações e pagamentos em um só lugar.
         </p>
-
       </div>
-
       <div className="flex flex-col mx-auto">
         <h2 className="text-lg font-semibold leading-6">Seja notificado</h2>
-        <form className="mt-6 sm:flex sm:max-w-md">
+        <form className="mt-6 sm:flex sm:max-w-md" noValidate onSubmit={onSubmit}>
           <label htmlFor="email-address" className="sr-only">
             E-mail
           </label>
@@ -40,13 +69,17 @@ export default function Home() {
             required
             className="min-w-0 flex-auto rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="Deixe seu melhor e-mail"
+            value={v}
+            onChange={e => setV(e.target.value)}
+            disabled={isLoading}
           />
           <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
             <button
               type="submit"
               className="flex w-full items-center justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              disabled={isLoading}
             >
-              Me avise
+              {isLoading ? 'Enviando...' : 'Me avise'}
             </button>
           </div>
         </form>
