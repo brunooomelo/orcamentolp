@@ -2,17 +2,26 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import ReactGA from 'react-ga'
+import * as gtag from '@/lib/gtag'
+import Analytics from '@/components/Analytics'
 
 const font = Inter({ subsets: ['latin'] })
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
   useEffect(() => {
-    ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS as string)
-    ReactGA.set({ page: window.location.pathname })
-    ReactGA.pageview(window.location.pathname)
-  }, [])
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
   return (
     <>
       <Head>
@@ -26,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <main className={`${font.className} container mx-auto px-8 py-20 text-center flex flex-col gap-8`}>
         <Component {...pageProps} />
+        <Analytics />
       </main>
     </>
   )
