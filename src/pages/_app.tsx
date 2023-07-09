@@ -32,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
           name="description"
           content="Crie e envie modelo de orçamento para seu cliente de forma rapida e pratica"
         />
+        <meta name="ahrefs-site-verification" content="0ff7ff9de03f88bcd24fe4511f725298dc7d90f3c915636975575d8b463daf90"></meta>
       </Head>
       <main className={`${font.className} container mx-auto px-8 py-20 text-center flex flex-col gap-8`}>
         <Component {...pageProps} />
