@@ -9,10 +9,10 @@ export default function NotFoundPage() {
         <p className="mt-6 text-base leading-7 text-gray-600">Desculpe, não encontramos a página que você está procurando.</p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link
-            href="#"
+            href="/"
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Voltar o site
+            Voltar ao site
           </Link>
           <a href="mailto:bruno94@outlook.coom" className="text-sm font-semibold text-gray-900">
             Entre em contato com o suporte <span aria-hidden="true">&rarr;</span>
