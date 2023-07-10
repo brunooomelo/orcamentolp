@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </title>
         <meta
           name="description"
-          content="Crie e envie modelo de orçamento para seu cliente de forma rapida e pratica"
+          content="Crie e envie modelo de orçamento para seu cliente de forma rapida e pratica, recebendo pagamento em alguns cliques."
         />
         <meta name="ahrefs-site-verification" content="0ff7ff9de03f88bcd24fe4511f725298dc7d90f3c915636975575d8b463daf90"></meta>
       </Head>
